@@ -1,0 +1,1 @@
+Variable XP Death Penalty
