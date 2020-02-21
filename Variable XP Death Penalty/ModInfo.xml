@@ -2,8 +2,8 @@
 
 <xml>
 	<ModInfo>
-		<Name value="Variable Death XP" />
-		<Description value="Changes the XP deficit debuff you get on death" />
+		<Name value="[SSyl] Meaningful Death" />
+		<Description value="Changes the XP deficit and revives you with only 70 hunger and thirst." />
 		<Author value="SSyl" />
 		<Version value="0.1" />
 		<Website value="" />

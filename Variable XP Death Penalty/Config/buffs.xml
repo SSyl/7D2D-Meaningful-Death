@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configs>
+
+	<!-- Add my debuff/buff when NearDeathTrauma triggers -->
+	<append xpath="/buffs/buff[@name='buffNearDeathTraumaTrigger']/effect_group">
+		<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffNearDeathPainsSSyl"/>
+	</append>
+
+	<!-- Change NearDeathRegen so it's not so forgiving -->
+	<set xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/triggered_effect[@trigger='onSelfBuffStart' and @action='ModifyCVar' and @cvar='$NearDeathRegen']/@value">0</set>
+	
+	<!-- This should remove regeneration for everything except health -->
+	<!--
+	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/passive_effect[@name!='HealthMaxModifierOT']"/>
+	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/requirement[@stat!='Health']"/>
+	-->
+
+	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/passive_effect"/>
+	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/requirement"/>
+
+	<!-- After respawn set hunger and thirst to  value below -->
+	<insertAfter xpath="/buffs/buff[@name='buffNearDeathRegen']">
+		<buff name="buffNearDeathPainsSSyl" name_key="buffNearDeathTraumaName"  icon="ui_game_symbol_near_death_trauma" icon_color="0,255,0" hidden="true">
+			<effect_group>
+				<!-- stat="Water" is thirst -->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Water" operation="set" value="70"/>
+				<!-- stat="Stamina" + value_type="modifiedmax" is your hunger/food amount -->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Stamina" value_type="modifiedmax" operation="set" value="70"/>
+			</effect_group>
+		</buff>
+	</insertAfter>
+
+</configs>
