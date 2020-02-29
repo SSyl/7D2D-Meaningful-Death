@@ -3,7 +3,7 @@
 <xml>
 	<ModInfo>
 		<Name value="[SSyl] Meaningful Death" />
-		<Description value="Changes the XP deficit and revives you with only 70 hunger and thirst." />
+		<Description value="Changes the XP deficit and revives you with only 70 hunger and thirst. Also gives you an infection upon revive." />
 		<Author value="SSyl" />
 		<Version value="0.1" />
 		<Website value="" />
