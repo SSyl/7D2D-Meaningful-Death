@@ -12,4 +12,4 @@ Before this mod: Broken leg? Infected? Starving or dying of thirst? No worries, 
 
 **Notes:**
 
-Currently still says 10% XP lost regardless of how much you actually lose. I have to change localization to fix that, although TFP have it wrong anyway. It says 10% XP lost when you actually lose 25%.
+Currently still says 10% XP lost regardless of how much you actually lose. I have to change localization to fix that, although TFP have it wrong anyway. It says 10% XP lost when you actually lose 66%.

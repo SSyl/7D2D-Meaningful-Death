@@ -6,15 +6,12 @@
 		<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffNearDeathPainsSSyl"/>
 	</append>
 
-	<!-- Change NearDeathRegen so it's not so forgiving -->
-	<set xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/triggered_effect[@trigger='onSelfBuffStart' and @action='ModifyCVar' and @cvar='$NearDeathRegen']/@value">0</set>
+	<!-- I could essentially just remove NearDeathRegen entirely, but I'm thinking about implementing it differently. So that's why I just disabled the effects/requirements in the buff itself for now. -->
 	
-	<!-- This should remove regeneration for everything except health -->
-	<!--
-	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/passive_effect[@name!='HealthMaxModifierOT']"/>
-	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/requirement[@stat!='Health']"/>
-	-->
+	<!-- Change NearDeathRegen so it's not so forgiving (currently set to 0, which disables it entirely) -->
+	<set xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/triggered_effect[@trigger='onSelfBuffStart' and @action='ModifyCVar' and @cvar='$NearDeathRegen']/@value">0</set>
 
+	<!-- This removes all near death regeneration (health, stamina, hunger, thirst) -->
 	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/passive_effect"/>
 	<remove xpath="/buffs/buff[@name='buffNearDeathRegen']/effect_group/requirement"/>
 
@@ -26,6 +23,14 @@
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Water" operation="set" value="70"/>
 				<!-- stat="Stamina" + value_type="modifiedmax" is your hunger/food amount -->
 				<triggered_effect trigger="onSelfBuffStart" action="ModifyStats" stat="Stamina" value_type="modifiedmax" operation="set" value="70"/>
+
+				<!-- Following two lines adds an infection after respawn. Only affects characters at level 10 and above. -->
+				<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="infectionCounter" operation="add" value="1">
+					<requirement name="PlayerLevel" operation="GTE" value="10" />
+				</triggered_effect>
+				<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffInfectionMain">
+					<requirement name="PlayerLevel" operation="GTE" value="10" />
+				</triggered_effect>
 			</effect_group>
 		</buff>
 	</insertAfter>
